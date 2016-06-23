@@ -11,4 +11,4 @@ lint:
 	golint
 
 test:
-	go test -coverprofile=coverage.out
+	go test -coverprofile=coverage.out -v
