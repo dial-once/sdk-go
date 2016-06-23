@@ -27,6 +27,29 @@ func (c *IVR) GetServiceStatus() (out *GetServiceStatusOutput, err error) {
 	return
 }
 
+// IsEligibleInput request input.
+type IsEligibleInput struct {
+	Called           	string             	`json:"called"`
+  Caller      	 		string            	`json:"caller"`
+}
+
+// IsEligibleOutput request input.
+type IsEligibleOutput struct {
+	Eligible          bool              	`json:"eligible"`
+}
+
+// IsEligible ...
+func (c *IVR) IsEligible(in *IsEligibleInput) (out *IsEligibleOutput, err error) {
+	body, err := c.call("GET", "ivr/isEligible", in)
+  if err != nil {
+    return
+  }
+  defer body.Close()
+
+  err = json.NewDecoder(body).Decode(&out)
+  return
+}
+
 // IsMobilePhoneNumberInput request input.
 type IsMobilePhoneNumberInput struct {
 	Number           string             `json:"number"`
@@ -80,15 +103,14 @@ type IVRLogInput struct {
 
 // IVRLogOutput request output.
 type IVRLogOutput struct {
-	Success           string             	`json:"success"`
+	Success           bool             	`json:"success"`
 }
-
 
 // SendIVRLog ...
 func (c *IVR) SendIVRLog(in *IVRLogInput, ivrLogType string) (out *IVRLogOutput, err error) {
 	in.Type = ivrLogType
 
-	body, err := c.call("POST", "ivrlogs", in)
+	body, err := c.call("POST", "ivr/log", in)
   if err != nil {
 		return
 	}
@@ -118,5 +140,27 @@ func (c *IVR) UserWantsToContinueWithSMS(in *IVRLogInput) (out *IVRLogOutput, er
 // UserPreferToContinueWithIVR ...
 func (c *IVR) UserPreferToContinueWithIVR(in *IVRLogInput) (out *IVRLogOutput, err error) {
 	c.SendIVRLog(in, "answer-no-sms")
+	return
+}
+
+// IVRServiceRequestInput request input.
+type IVRServiceRequestInput struct {
+	Called           	string             	`json:"called"`
+  Caller      	 		string            	`json:"caller"`
+}
+
+// IVRServiceRequestOutput request output.
+type IVRServiceRequestOutput struct {
+	Success           bool             	`json:"success"`
+}
+
+// SendServiceRequest ...
+func (c *IVR) SendServiceRequest(in *IVRServiceRequestInput) (out *IVRServiceRequestOutput, err error) {
+	body, err := c.call("POST", "ivr/serviceRequest", in)
+  if err != nil {
+		return
+	}
+	defer body.Close()
+	err = json.NewDecoder(body).Decode(&out)
 	return
 }
