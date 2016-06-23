@@ -7,6 +7,9 @@ build:
 coverage:
 	go tool cover -html=coverage.out -o coverage.html
 
+format:
+	go fmt
+
 lint:
 	golint
 
