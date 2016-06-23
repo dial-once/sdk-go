@@ -4,19 +4,18 @@ import (
 	"bytes"
 	"encoding/json"
 	"errors"
+	"github.com/segmentio/go-env"
 	"io"
 	"net/http"
-	"github.com/segmentio/go-env"
 )
-
 
 var baseURL = env.GetDefault("DIALONCE_BASE_URL", "https://api.dial-once.com/")
 
 // Client represents a Dial Once client.
 type Client struct {
-	Config 	*ClientConfig
-	HTTPClient  *http.Client
-	IVR 		*IVR
+	Config     *ClientConfig
+	HTTPClient *http.Client
+	IVR        *IVR
 }
 
 // ClientConfig ...
@@ -39,14 +38,14 @@ func (c *Client) SetBaseURL(baseURL string) {
 func NewConfig(accessToken string) *ClientConfig {
 	return &ClientConfig{
 		AccessToken: accessToken,
-		BaseURL: baseURL,
+		BaseURL:     baseURL,
 	}
 }
 
 // New client.
 func New(config *ClientConfig) *Client {
 	client := &Client{
-		Config: config,
+		Config:     config,
 		HTTPClient: http.DefaultClient,
 	}
 
