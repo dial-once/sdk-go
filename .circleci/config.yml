@@ -17,22 +17,6 @@ jobs:
           name: install make
           command: sudo apt-get update && sudo apt-get -y install gcc make
 
-      # Download and cache dependencies
-      - restore_cache:
-          keys:
-          - v1-dependencies-{{ .Branch }}-{{ checksum "package.json" }}
-          - v1-dependencies-{{ .Branch }}
-          # fallback to using the latest cache if no exact match is found
-          - v1-dependencies
-      - run:
-          name: Install dependencies
-          command: make build
-
-      - save_cache:
-          paths:
-          - node_modules
-          key: v1-dependencies-{{ .Branch }}-{{ checksum "package.json" }}
-
       - run:
           name: Linting
           command: make lint
