@@ -7,6 +7,5 @@ jobs:
     steps:
       - checkout
 
-      - run:
-          name: coverage
-          command: go tool cover -html=coverage.out -o coverage.html
+      - run: make format && ls -la
+
