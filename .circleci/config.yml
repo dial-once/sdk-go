@@ -11,5 +11,7 @@ jobs:
       - run: go get github.com/mattes/migrate
       - run: go get github.com/jstemmer/go-junit-report
 
-      - run: cd /usr/local/go
+      - run: cd /usr/local/go && ls -la
+      - checkout
+      - run: make test
 
