@@ -12,6 +12,7 @@ jobs:
       - run: go get github.com/jstemmer/go-junit-report
 
       - run: cd /usr/local/go/src/github.com/segmentio/ && ls -la
-      - checkout
+      - run: export GOROOT=$HOME/go1.8 && export PATH=$PATH:$GOROOT/bin
+
       - run: make test
 
