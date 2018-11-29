@@ -6,9 +6,7 @@ jobs:
     working_directory: ~/sdk-go
     steps:
       - checkout
-      - run:
-          name: lint
-          command: golint
+
       - run:
           name: coverage
           command: go tool cover -html=coverage.out -o coverage.html
