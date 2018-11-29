@@ -7,6 +7,12 @@ jobs:
     steps:
       - checkout
       - run: go get -v -t -d ./...
-      - run: go test -race
+      - run:
+          command: go tool cover -html=coverage.out -o coverage.html
+          when: always
+
+      - run:
+          command: go test -coverprofile=coverage.out -v
+          when: always
 
 
