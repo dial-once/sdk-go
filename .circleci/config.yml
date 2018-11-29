@@ -11,7 +11,7 @@ jobs:
       - run: go get github.com/mattes/migrate
       - run: go get github.com/jstemmer/go-junit-report
 
-      - run: cd /usr/local/go/src/github.com && ls -la
+      - run: cd /usr/local/go/src && ls -la
       - checkout
       - run: export GOROOT=$HOME/go1.8 && export PATH=$PATH:$GOROOT/bin
 
