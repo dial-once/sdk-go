@@ -7,9 +7,6 @@ jobs:
     steps:
       - checkout
       - run:
-          name: build
-          command: go build -o dialonce
-      - run:
           name: lint
           command: golint
       - run:
