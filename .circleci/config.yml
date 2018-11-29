@@ -7,5 +7,9 @@ jobs:
     steps:
       - checkout
 
-      - run: make build
+      - run: go get github.com/lib/pq
+      - run: go get github.com/mattes/migrate
+      - run: go get github.com/jstemmer/go-junit-report
+
+      - run: cd /usr/local/go
 
