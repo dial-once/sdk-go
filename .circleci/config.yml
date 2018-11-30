@@ -28,10 +28,7 @@ jobs:
           command: make build
       - run:
           name: Linting
-          command: golint
-      - run:
-          name: Coverage
-          command: make coverage
+          command: golint .
       - run:
           name: Test project
           command: make test
