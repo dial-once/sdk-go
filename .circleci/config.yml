@@ -7,8 +7,17 @@ jobs:
     steps:
       - checkout
       - run: go get -v -t -d ./...
+
       - run:
-          command: go tool cover -html=coverage.out -o coverage.html
+          command: make build
+          when: always
+
+      - run:
+          command: make format
+          when: always
+
+      - run:
+          command: make coverage
           when: always
 
       - run:
