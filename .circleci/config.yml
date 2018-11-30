@@ -1,27 +1,27 @@
+# Javascript Node CircleCI 2.0 configuration file
+#
+# Check https://circleci.com/docs/2.0/language-javascript/ for more details
+#
 version: 2
 jobs:
   build:
+    working_directory: ~/sdk-go
     docker:
       - image: circleci/golang:1.8
-    working_directory: ~/sdk-go
+      # Specify service dependencies here if necessary
+      # CircleCI maintains a library of pre-built images
+      # documented at https://circleci.com/docs/2.0/circleci-images/
     steps:
       - checkout
-      - run: go get -v -t -d ./...
-
       - run:
-          command: make build
-          when: always
-
+          name: Install make
+          command: sudo apt-get update && sudo apt-get -y install gcc make
       - run:
-          command: make format
-          when: always
-
+          name: Install tools
+          command: go get -v -t -d ./...
       - run:
-          command: ls -la
-          when: always
-
+          name: lint
+          command: make lint
       - run:
-          command: go test -coverprofile=coverage.out -v
-          when: always
-
-
+          name: Test project
+          command: make test
