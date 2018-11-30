@@ -20,8 +20,8 @@ jobs:
           name: Install tools
           command: go get -v -t -d ./...
       - run:
-          name: lint
-          command: make lint
+          name: Linting
+          command: golint
       - run:
           name: Test project
           command: make test
