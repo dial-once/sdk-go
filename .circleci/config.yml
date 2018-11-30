@@ -18,7 +18,13 @@ jobs:
           command: sudo apt-get update && sudo apt-get -y install gcc make
       - run:
           name: Install tools
-          command: go get -v -t -d ./...
+          command: |
+            go get -v -t -d ./...
+            go get -u golang.org/x/tools/cmd/cover
+            go get -u github.com/alecthomas/gometalinter
+            gometalinter --install --update
+            ls $GOPATH/bin/golint
+
       - run:
           name: build
           command: make build
