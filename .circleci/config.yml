@@ -23,14 +23,15 @@ jobs:
             go get -u golang.org/x/tools/cmd/cover
             go get -u github.com/alecthomas/gometalinter
             gometalinter --install --update
-            ls $GOPATH/bin/golint
-
       - run:
           name: build
           command: make build
       - run:
-          name: testing
-          command: echo $GOPATH
+          name: Linting
+          command: golint
+      - run:
+          name: Coverage
+          command: make coverage
       - run:
           name: Test project
           command: make test
