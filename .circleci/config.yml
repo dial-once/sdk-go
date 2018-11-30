@@ -22,12 +22,13 @@ jobs:
             go get -v -t -d ./...
             go get -u golang.org/x/tools/cmd/cover
             go get -u github.com/alecthomas/gometalinter
+            gometalinter --install --update
       - run:
           name: build
           command: make build
       - run:
           name: Linting
-          command: golint .
+          command: golint
       - run:
           name: Test project
           command: make test
