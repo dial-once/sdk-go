@@ -17,11 +17,11 @@ jobs:
           name: Install make
           command: sudo apt-get update && sudo apt-get -y install gcc make
       - run:
-          name: build
-          command: make build
-      - run:
           name: Install tools
           command: go get -v -t -d ./...
+      - run:
+          name: build
+          command: make build
       - run:
           name: testing
           command: echo $GOPATH
