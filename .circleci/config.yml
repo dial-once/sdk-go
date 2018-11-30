@@ -17,7 +17,7 @@ jobs:
           when: always
 
       - run:
-          command: make coverage
+          command: ls -la
           when: always
 
       - run:
